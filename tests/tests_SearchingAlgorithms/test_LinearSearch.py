@@ -1,5 +1,5 @@
 import pytest
-from LinearDataStructures import LinearSearch
+from SearchingAlgorithms import LinearSearch
 
 
 @pytest.fixture
