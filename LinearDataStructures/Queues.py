@@ -136,6 +136,26 @@ class Queue:
         # If there is a head node
         return self.head.get_value()
 
+    def __str__(self) -> str:
+        """
+        Returns a string representation of the Queue
+
+        Time Complexity: O(n)
+        Space Complexity: O(n)
+
+        :return: A comma-seperated string of node values or "Empty List" for an empty Queue
+        """
+        # Empty Queue
+        if self.is_empty():
+            return "Empty Queue"
+
+        result_list = []
+        current_element = self.head
+        while current_element:
+            result_list.append(str(current_element.get_value()))
+            current_element = current_element.get_next_node()
+        return ", ".join(result_list)
+
     def get_size(self) -> int:
         """
         Returns the size of the Queue
