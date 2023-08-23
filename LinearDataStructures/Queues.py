@@ -12,7 +12,7 @@ class QueueState(Enum):
 
 
 class Queue:
-    def __init__(self, max_size=None) -> None:
+    def __init__(self, max_size: int = None) -> None:
         """
         Initialise a queue with an optional max size
 

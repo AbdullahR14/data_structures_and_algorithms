@@ -74,6 +74,28 @@ class TestGetFirstElement:
             empty_queue.get_first_element()
 
 
+class TestHasSpace:
+    def test_has_space(self, queue_with_elements):
+        assert queue_with_elements.has_space() is True
+
+    def test_has_space_full_queue(self, full_queue):
+        assert full_queue.has_space() is False
+
+    def test_has_space_empty_queue(self, empty_queue):
+        assert empty_queue.has_space() is True
+
+
+class TestIsEmpty:
+    def test_is_empty(self, queue_with_elements):
+        assert queue_with_elements.is_empty() is False
+
+    def test_is_empty_full_queue(self, full_queue):
+        assert full_queue.is_empty() is False
+
+    def test_is_empty_empty_queue(self, empty_queue):
+        assert empty_queue.is_empty() is True
+
+
 class TestQueueStringRepresentation:
     def test_string_representation(self, queue_with_elements):
         assert queue_with_elements.__str__() == "1, 2, 3"
@@ -86,12 +108,28 @@ class TestQueueStringRepresentation:
 
 
 class TestQueueIncrementAndDecrement:
-    def test_queue_increment_decrement_after_removal(self, queue_with_elements):
+    def test_increment_queue(self, queue_with_elements):
         initial_size = queue_with_elements.get_size()
+        queue_with_elements.add_to_queue(4)
+        assert queue_with_elements.get_size() == initial_size + 1
 
+    def test_decrement_queue(self, queue_with_elements):
+        initial_size = queue_with_elements.get_size()
         queue_with_elements.remove_from_queue()
         assert queue_with_elements.get_size() == initial_size - 1
 
-        queue_with_elements.add_to_queue(4)
-        queue_with_elements.add_to_queue(5)
-        assert queue_with_elements.get_size() == initial_size + 1
+    def test_increment_queue_full_queue(self, full_queue):
+        initial_size = full_queue.get_size()
+        with pytest.raises(ValueError):
+            full_queue.add_to_queue(4)
+
+        # Make sure the queue is still full
+        assert full_queue.get_size() == initial_size
+
+    def test_decrement_queue_empty_queue(self, empty_queue):
+        initial_size = empty_queue.get_size()
+        with pytest.raises(ValueError):
+            empty_queue.remove_from_queue()
+
+        # Make sure the queue is still empty
+        assert empty_queue.get_size() == initial_size
