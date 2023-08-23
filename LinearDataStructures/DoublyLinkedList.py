@@ -1,7 +1,10 @@
 from typing import Any, Dict
 
 
-class DoubleNode:
+from LinearDataStructures.Node import Node
+
+
+class DoubleNode(Node):
     def __init__(self, value: Any, next_node=None, prev_node=None) -> None:
         """
         Initialise a new node with the given value and optional next and previous node references
@@ -9,8 +12,29 @@ class DoubleNode:
         :param next_node: Reference to the next node in the sequence
         :param prev_node: Reference to the previous node in the sequence
         """
-        self.value = value
-        self.next_node = next_node
+        super().__init__(value, next_node)
+        self.prev_node = prev_node
+
+    def get_prev_node(self):
+        """
+        Getter method that returns the previous node in the sequence
+
+        Time Complexity: O(1)
+        Space Complexity: O(1)
+
+        :return: previous node in the sequence or None if there is none
+        """
+        return self.prev_node
+
+    def set_prev_node(self, prev_node) -> None:
+        """
+        Setter method that sets the prev_node in the sequence
+
+        Time Complexity: O(1)
+        Space Complexity O(1)
+
+        :param prev_node: previous node in the sequence
+        """
         self.prev_node = prev_node
 
 
@@ -48,14 +72,14 @@ class DoublyLinkedList:
 
         # One Node
         if self.head_node == self.tail_node:
-            self.head_node.next_node = new_node
-            new_node.prev_node = self.head_node
+            self.head_node.set_next_node(new_node)
+            new_node.set_prev_node(self.head_node)
             self.tail_node = new_node
             return
 
         # Multiple Nodes
-        self.tail_node.next_node = new_node
-        new_node.prev_node = self.tail_node
+        self.tail_node.set_next_node(new_node)
+        new_node.set_prev_node(self.tail_node)
         self.tail_node = new_node
 
     def add_node_to_front(self, value: Any) -> None:
@@ -81,14 +105,14 @@ class DoublyLinkedList:
 
         # One Node
         if self.head_node == self.tail_node:
-            self.head_node.prev_node = new_node
-            new_node.next_node = self.head_node
+            self.head_node.set_prev_node(new_node)
+            new_node.set_next_node(self.head_node)
             self.head_node = new_node
             return
 
         # Multiple Nodes
-        self.head_node.prev_node = new_node
-        new_node.next_node = self.head_node
+        self.head_node.set_prev_node(new_node)
+        new_node.set_next_node(self.head_node)
         self.head_node = new_node
 
     def remove_single_node_instance(self, value_to_remove: Any) -> DoubleNode:
@@ -111,21 +135,18 @@ class DoublyLinkedList:
             raise ValueError("The Linked List is empty")
 
         # Value matches head node
-        if self.head_node.value == value_to_remove:
-            if self.head_node.next_node:
-                self.head_node.next_node.prev_node = None
-            self.head_node = self.head_node.next_node
+        if self.head_node.get_value() == value_to_remove:
+            self.head_node = self.head_node.get_next_node()
             return self.head_node
 
+        # Multiple Nodes
         current_node = self.head_node
-        while current_node.next_node:
-            if current_node.next_node.value == value_to_remove:
-                if current_node.next_node.next_node:
-                    current_node.next_node.next_node.prev_node = current_node
-                current_node.next_node = current_node.next_node.next_node
-                return current_node.next_node
+        while current_node.get_next_node():
+            if current_node.get_next_node().get_value() == value_to_remove:
+                current_node.set_next_node(current_node.get_next_node().get_next_node())
+                return current_node.get_next_node()
 
-            current_node = current_node.next_node
+            current_node = current_node.get_next_node()
 
         raise ValueError("Value not found in Linked List")
 
@@ -149,25 +170,23 @@ class DoublyLinkedList:
 
         # Remove from head
         position = 0
-        while self.head_node and self.head_node.value == value_to_remove:
+        if self.head_node.get_value() == value_to_remove:
+            # Add to removed nodes
             removed_nodes[position] = self.head_node
-            self.head_node = self.head_node.next_node
-            if self.head_node:
-                self.head_node.prev_node = None
+
+            # Remove from the list
+            self.head_node = self.head_node.get_next_node()
             position += 1
 
         # Remove from middle and tail
-        current_position = position
         current_node = self.head_node
-        while current_node and current_node.next_node:
-            if current_node.next_node.value == value_to_remove:
-                removed_nodes[current_position] = current_node.next_node
-                current_node.next_node = current_node.next_node.next_node
-                if current_node.next_node:
-                    current_node.next_node.prev_node = current_node
-                current_position += 1
+        while current_node and current_node.get_next_node():
+            if current_node.get_next_node().get_value() == value_to_remove:
+                removed_nodes[position] = current_node.get_next_node()
+                current_node.set_next_node(current_node.get_next_node().get_next_node())
+                position += 1
             else:
-                current_node = current_node.next_node
+                current_node = current_node.get_next_node()
 
         if not removed_nodes:
             raise ValueError("Value not found in Linked List")
@@ -190,6 +209,6 @@ class DoublyLinkedList:
         result_list = []
         current_node = self.head_node
         while current_node:
-            result_list.append(str(current_node.value))
-            current_node = current_node.next_node
+            result_list.append(str(current_node.get_value()))
+            current_node = current_node.get_next_node()
         return ", ".join(result_list)
