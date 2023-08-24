@@ -1,6 +1,6 @@
 import pytest
 
-from LinearDataStructures.Queues import Queue
+from src.LinearDataStructures.Queues import Queue
 
 
 @pytest.fixture

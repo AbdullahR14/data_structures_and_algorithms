@@ -1,6 +1,6 @@
 from typing import Any
 
-from LinearDataStructures.Node import Node
+from src.LinearDataStructures.Node import Node
 
 
 class Stack:

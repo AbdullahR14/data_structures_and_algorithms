@@ -1,7 +1,7 @@
 from typing import Any, Dict
 
 
-from LinearDataStructures.Node import Node
+from src.LinearDataStructures.Node import Node
 
 
 class DoubleNode(Node):

@@ -1,5 +1,5 @@
 import pytest
-from SearchingAlgorithms.BinarySearch import binary_search_recursive, binary_search_iterative
+from src.SearchingAlgorithms.BinarySearch import binary_search_recursive, binary_search_iterative
 
 
 @pytest.mark.parametrize(

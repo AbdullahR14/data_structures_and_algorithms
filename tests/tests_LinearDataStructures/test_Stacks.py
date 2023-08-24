@@ -1,6 +1,6 @@
 import pytest
 
-from LinearDataStructures.Stacks import Stack
+from src.LinearDataStructures.Stacks import Stack
 
 
 @pytest.fixture

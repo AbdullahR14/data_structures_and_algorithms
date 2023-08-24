@@ -1,7 +1,7 @@
 from typing import Any
 from enum import Enum
 
-from LinearDataStructures.Node import Node
+from src.LinearDataStructures.Node import Node
 
 
 class QueueState(Enum):
