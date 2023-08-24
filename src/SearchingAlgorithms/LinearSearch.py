@@ -1,7 +1,7 @@
-from typing import Iterable, Any, List
+from typing import Tuple, Any, List
 
 
-def linear_search(search_iterable: Iterable, search_value: Any) -> int:
+def linear_search(search_iterable: List[Any], search_value: Any) -> int:
     """
     Linear search algorithm implementation
 
@@ -19,7 +19,7 @@ def linear_search(search_iterable: Iterable, search_value: Any) -> int:
     raise ValueError("Value not found in iterable")
 
 
-def find_all_instances(search_iterable: Iterable, search_value: Any) -> List[int]:
+def find_all_instances(search_iterable: List[Any], search_value: Any) -> List[int]:
     """
     Linear Search implementation to find all instances of a value within an iterable
 
@@ -41,11 +41,11 @@ def find_all_instances(search_iterable: Iterable, search_value: Any) -> List[int
     return instances
 
 
-def find_max_value(search_iterable: Iterable[int]) -> tuple[int, int]:
+def find_max_value(search_iterable: List[int]) -> Tuple[int, int]:
     """
     Linear Search implementation to find the maximum value within an iterable
 
-    Time Complexity: O(n)
+    Time Complexity: O(n)5
     Space Complexity O(1)
 
     :param search_iterable: An iterable to search through

@@ -1,8 +1,8 @@
-from typing import Iterable
+from typing import List, Union
 
 
-def binary_search_recursive(search_iterable: Iterable[int | float], left_pointer: int, right_pointer: int,
-                            search_value: int | float) -> int:
+def binary_search_recursive(search_iterable: List[Union[int, float]], left_pointer: int, right_pointer: int,
+                            search_value: Union[int, float]) -> int:
     """
     Recursive Binary Search implementation
 
@@ -38,7 +38,7 @@ def binary_search_recursive(search_iterable: Iterable[int | float], left_pointer
         return binary_search_recursive(search_iterable, mid_pointer + 1, right_pointer, search_value)
 
 
-def binary_search_iterative(search_iterable: Iterable[int | float], search_value: int | float) -> int:
+def binary_search_iterative(search_iterable: List[Union[int, float]], search_value: Union[int, float]) -> int:
     """
     Iterative Binary Search implementation
 
