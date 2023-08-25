@@ -37,6 +37,9 @@ def binary_search_recursive(search_iterable: List[Union[int, float]], left_point
         # return recursive call with the left pointer set to the middle pointer + 1
         return binary_search_recursive(search_iterable, mid_pointer + 1, right_pointer, search_value)
 
+    # Removing this breaks mypy
+    raise ValueError("Value not found in iterable")
+
 
 def binary_search_iterative(search_iterable: List[Union[int, float]], search_value: Union[int, float]) -> int:
     """

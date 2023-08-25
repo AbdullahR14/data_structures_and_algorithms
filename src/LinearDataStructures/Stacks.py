@@ -1,16 +1,17 @@
-from typing import Any
+from typing import Any, Union
 
-from src.LinearDataStructures.Node import Node
+from src.LinearDataStructures.SingleNode import SingleNode
 
 
 class Stack:
-    def __init__(self, max_size: int = None) -> None:
+    def __init__(self, max_size: Union[int, None] = None) -> None:
         """
         Initialise a stack with an optional max size
 
         :param max_size: The maximum size of the stack
         """
-        self.top_node = None
+        # Initialise top node as a "None Node"
+        self.top_node = SingleNode(None)
         self.max_size = max_size
         self.size = 0
 
@@ -29,7 +30,7 @@ class Stack:
             raise ValueError("The Stack is full")
 
         # Instantiate the node
-        item = Node(value)
+        item = SingleNode(value)
 
         # If stack is empty
         if self.is_empty():

@@ -1,7 +1,7 @@
 from typing import Any
 
 
-class Node:
+class SingleNode:
     def __init__(self, value: Any, next_node=None) -> None:
         """
         Initialise a new node with the given value
@@ -11,6 +11,17 @@ class Node:
         """
         self.value = value
         self.next_node = next_node
+
+    def get_value(self) -> Any:
+        """
+        Getter method that returns the value assigned to the node
+
+        Time Complexity: O(1)
+        Space Complexity: O(1)
+
+        :return: the value assigned to the node
+        """
+        return self.value
 
     def get_next_node(self):
         """
@@ -33,14 +44,3 @@ class Node:
         :param next_node: next node in the sequence
         """
         self.next_node = next_node
-
-    def get_value(self) -> Any:
-        """
-        Getter method that returns the value assigned to the node
-
-        Time Complexity: O(1)
-        Space Complexity: O(1)
-
-        :return: the value assigned to the node
-        """
-        return self.value

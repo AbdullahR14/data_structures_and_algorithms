@@ -1,10 +1,10 @@
 from typing import Any
 
-from src.LinearDataStructures.Node import Node
+from src.LinearDataStructures.SingleNode import SingleNode
 
 
 class LinkedList:
-    def __init__(self, head_node: Node = None) -> None:
+    def __init__(self, head_node: SingleNode = None) -> None:
         """
         Initialise a linked list with an optional head node.
 
@@ -25,7 +25,7 @@ class LinkedList:
         :param value: The value to add to the linked list.
         """
         # Create the new node
-        new_node = Node(value)
+        new_node = SingleNode(value)
 
         # Empty List
         if not self.head_node:
@@ -42,7 +42,7 @@ class LinkedList:
         # Set the next_node reference of the last node to the new node
         current_node.set_next_node(new_node)
 
-    def remove_node(self, value_to_remove: Any) -> Node:
+    def remove_node(self, value_to_remove: Any) -> SingleNode:
         """
         Remove the first occurrence of a node with the given value from the linked list.
 

@@ -1,7 +1,7 @@
-from typing import Any
+from typing import Any, Union
 from enum import Enum
 
-from src.LinearDataStructures.Node import Node
+from src.LinearDataStructures.SingleNode import SingleNode
 
 
 class QueueState(Enum):
@@ -12,14 +12,15 @@ class QueueState(Enum):
 
 
 class Queue:
-    def __init__(self, max_size: int = None) -> None:
+    def __init__(self, max_size: Union[int, None] = None) -> None:
         """
         Initialise a queue with an optional max size
 
         :param max_size: The maximum size of the queue
         """
-        self.head = None
-        self.tail = None
+        # Initialise self.head and self.tail as "None Nodes"
+        self.head = SingleNode(None)
+        self.tail = SingleNode(None)
         self.max_size = max_size
         self.size = 0
 
@@ -38,7 +39,7 @@ class Queue:
             raise ValueError("The Queue is full")
 
         # Instantiate the node
-        item = Node(value)
+        item = SingleNode(value)
 
         # If queue is empty
         if self.is_empty():
@@ -157,7 +158,7 @@ class Queue:
 
         :return: boolean indicating if the queue is empty
         """
-        return self.size == 0
+        return self.get_size() == 0 or not self.head
 
     def increment_queue(self, n: int = 1) -> None:
         """

@@ -1,45 +1,10 @@
-from typing import Any, Dict
+from typing import Any, Dict, Union
 
-
-from src.LinearDataStructures.Node import Node
-
-
-class DoubleNode(Node):
-    def __init__(self, value: Any, next_node=None, prev_node=None) -> None:
-        """
-        Initialise a new node with the given value and optional next and previous node references
-        :param value: The value to store in the node
-        :param next_node: Reference to the next node in the sequence
-        :param prev_node: Reference to the previous node in the sequence
-        """
-        super().__init__(value, next_node)
-        self.prev_node = prev_node
-
-    def get_prev_node(self):
-        """
-        Getter method that returns the previous node in the sequence
-
-        Time Complexity: O(1)
-        Space Complexity: O(1)
-
-        :return: previous node in the sequence or None if there is none
-        """
-        return self.prev_node
-
-    def set_prev_node(self, prev_node) -> None:
-        """
-        Setter method that sets the prev_node in the sequence
-
-        Time Complexity: O(1)
-        Space Complexity O(1)
-
-        :param prev_node: previous node in the sequence
-        """
-        self.prev_node = prev_node
+from src.LinearDataStructures.DoubleNode import DoubleNode
 
 
 class DoublyLinkedList:
-    def __init__(self, head_node: DoubleNode = None, tail_node: DoubleNode = None) -> None:
+    def __init__(self, head_node: Union[DoubleNode, None] = None, tail_node: Union[DoubleNode, None] = None) -> None:
         """
         Initialises a doubly linked list with optional head and tail nodes.
 
@@ -65,7 +30,7 @@ class DoublyLinkedList:
         new_node = DoubleNode(value)
 
         # Empty List
-        if not self.head_node and not self.tail_node:
+        if not self.head_node or not self.tail_node:
             self.head_node = new_node
             self.tail_node = new_node
             return
@@ -98,7 +63,7 @@ class DoublyLinkedList:
         new_node = DoubleNode(value)
 
         # Empty List
-        if not self.head_node and not self.tail_node:
+        if not self.head_node or not self.tail_node:
             self.head_node = new_node
             self.tail_node = new_node
             return
